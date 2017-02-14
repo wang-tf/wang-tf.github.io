@@ -1,0 +1,127 @@
+SSD（Single Shot MultiBox Detector）算是一个比较不错的目标检测算法，主攻方向是速度，当然精度也比Yolo提高了一些
+SSD采用的是在caffe文件夹中内嵌例程的方式，作者改动了原版caffe，所以你需要把原来的caffe文件夹移除，Git命令会新建一个带有SSD程序的caffe文件夹，当然，这个新的caffe要重新编译一次。
+
+# 1 下载
+将原有的caffe文件夹改名，比如caffe-pure
+
+```
+git clone https://github.com/weiliu89/caffe.git  
+cd caffe
+git checkout ssd
+```
+
+或者直接下载ssd分支，文件夹名字为caffe-ssd，不需要checkout
+
+# 2 编译
+按照正常caffe的修改和编译方法进行
+
+```
+make -j16 
+make py  
+make test -j16 
+make runtest -j16 
+```
+
+# 3 训练模型
+
+## 3.1 下载已经训练好的模型
+[https://gist.github.com/weiliu89/2ed6e13bfd5b57cf81d6](https://gist.github.com/weiliu89/2ed6e13bfd5b57cf81d6)
+将其放入新建的文件夹/home/mx/caffe/models/VGGNet/
+
+## 3.2 下载voc2007和voc2012数据集
+
+```
+cd ~/data  
+wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar  
+wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar  
+wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
+```
+
+这里用的脚本实现批处理，可能会出现错误：no module named caffe或者no module named caffe-proto，那是caffe的Python环境变量未配置好，解决方法：
+
+```
+echo "export PYTHONPATH=/home/weiguang/caffe-ssd/python" >> ~/.profile  
+source ~/.profile  
+echo $PYTHONPATH #检查环境变量的值
+```
+
+## 3.3 下载后按顺序解压
+
+```
+cd ~/caffe-ssd/ #进入caffe的根目录  
+./data/VOC0712/create_list.sh  
+./data/VOC0712/create_data.sh
+```
+
+## 3.4 下载预训练的模型
+[https://gist.github.com/weiliu89/2ed6e13bfd5b57cf81d6](https://gist.github.com/weiliu89/2ed6e13bfd5b57cf81d6)
+将该模型保存到$CAFFE_ROOT/models/VGGNet下
+
+## 3.5 训练模型
+
+>为了避免Check failed: error == cudaSuccess (10 vs. 0) invalid device ordinal
+vim examples/sd/ssd_passcal.py
+将gpus = "0,1,2,3"
+gpus = "0"
+为了避免error == cudaSuccess (2 vs. 0)  out of memory
+将batch_size 调小，比如 由32改为8
+
+`python examples/ssd/ssd_pascal.py`
+摄像头实时监测
+`python examples/ssd/ssd_pascal_webcam.py`
+
+# 4 训练自己的数据
+在/data目录下创建一个自己的文件夹：
+
+```
+cd ~/caffe-ssd/data/
+mkdir mydataset
+```
+
+把~/caffe-ssd/data/VOC0712目录下的create_list.sh 、create_data.sh、labelmap_voc.prototxt 这三个文件拷贝到/mydataset下：
+
+```
+cp data/create* ./mydataset
+cp data/label* ./mydataset        #labelmap_voc.prototxt, 此文件定义label
+```
+
+在~/data/VOCdevkit目录下创建mydataset, 并放入自己的数据集:
+
+```
+cd ~/data/VOCdevkit
+mkdir mydataset
+cd mydataset
+mkdir Annotations ImageSets JPEGImages
+cd ImageSets
+mkdir Layout Main Segmentation
+```
+
+其中
+Annotations中存放一些列XML文件，包含object的bbox，name等； 
+ImageSets中三个子目录下均存放train.txt, val.txt, trainval.txt, test.txt这几个文件，文件内容为图片的文件名（不带后缀）； 
+JPEGImages存放所有的图片；
+
+在~/caffe-ssd/examples下创建mydataset文件夹：`mkdir mydataset` 文件夹内存放生成的lmdb文件。
+上述文件夹创建好后， 开始生成lmdb文件, 在创建之前需要修改相关路径：
+
+```
+./data/mydataset/create_list.sh
+./data/mydataset/create_data.sh
+```
+
+此时，在~/caffe-ssd/examples/mydataset/文件夹下可以看到两个子文件夹, **mydataset_trainval_lmdb**, **mydataset_test_lmdb**；里面均包含**data.dmb**和**lock.dmb**;
+到此为止,我们的数据集就做好了。接下来就开始训练了。训练程序为/examples/ssd/ssd_pascal.py，运行之前，我们需要修改相关路径代码：
+`vim ~/caffe-ssd/examples/ssd/ssd_pascal.py `
+
+>57行： train_data路径；
+59行：test_data路径；
+197-203行：save_dir、snapshot_dir、job_dir、output_result_dir路径；
+216-220行： name_size_file、label_map_file路径；
+223行：num_classes 修改为1 + 类别数
+315行：num_test_image：测试集图片数目
+另外， 如果你只有一个GPU, 需要修改285行： 
+gpus=”0,1,2,3” ===> 改为”0” 
+否则，训练的时候会出错。 
+
+修改完后运行
+`python ./examples/ssd/ssd_pascal.py `
