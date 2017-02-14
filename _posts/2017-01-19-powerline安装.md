@@ -1,3 +1,19 @@
+---
+layout: post
+#标题配置
+title:  powerline安装指南
+#时间配置
+date:   2017-01-19 01:00:00 +0800
+#大类配置
+categories: Linux
+#小类配置
+tag: powerline bash vim
+---
+
+* content
+{:toc}
+
+
 Powerline是vim编辑器的插件，它是Python开发的，为多个应用（bash，zsh，tmux等）提供statusline。
 
 # 1 安装powerline

@@ -1,4 +1,20 @@
-在Python终用import...或者from...import...来导入相应的模块。  
+---
+layout: post
+#标题配置
+title:  python的import与from...import的区别
+#时间配置
+date:   2017-01-15 01:08:00 +0800
+#大类配置
+categories: linux
+#小类配置
+tag: python import
+---
+
+* content
+{:toc}
+
+
+在Python中用import...或者from...import...来导入相应的模块。  
 模块其实就是一些函数和类的集合文件，它能实现一些相应的功能，当我们需要使用这些功能的时候，直接把相应的模块导入到我们的程序中，我们就可以使用了。  
 这类似于C语言中的include头文件，Python中我们用import导入我们需要的模块。  
 
