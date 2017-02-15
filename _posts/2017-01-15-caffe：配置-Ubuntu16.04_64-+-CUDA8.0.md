@@ -37,7 +37,7 @@ tag: Caffe
 ## 1.1 安装相关依赖项
 在Terminal中安装依赖项
 
-```bash
+{% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y build-essential cmake git pkg-config
@@ -56,7 +56,7 @@ sudo apt-get install --assume-yes libopencv-dev libgtk-3-dev libdc1394-22 libdc1
 sudo apt-get install --assume-yes libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
 sudo apt-get install --assume-yes libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
 sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
-```
+{% endhighlight %}
 
 ## 1.2 安装NVIDIA驱动
 BIOS选择自由选择显卡
