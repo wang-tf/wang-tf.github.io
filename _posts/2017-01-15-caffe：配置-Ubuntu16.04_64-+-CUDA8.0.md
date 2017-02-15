@@ -69,6 +69,7 @@ BIOS选择自由选择显卡
 `sudo ubuntu-drivers devices`
 
 ![显卡信息](https://striker.teambition.net/thumbnail/110oe8cb536d1fe770c5cfd69248ff30708a/w/400/h/141)
+![显卡信息]({{'/images/graphics card info.png'}})
 
 ```bash
 sudo add-apt-repository ppa:graphics-drivers  #添加官方源
