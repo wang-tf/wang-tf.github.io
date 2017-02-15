@@ -7,7 +7,9 @@ date:   2017-01-15 01:08:00 +0800
 #大类配置
 categories: linux
 #小类配置
-tag: python import
+tag: 
+- python
+- import
 ---
 
 * content
