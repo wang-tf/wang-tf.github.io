@@ -7,7 +7,10 @@ date:   2017-01-19 01:00:00 +0800
 #大类配置
 categories: Linux
 #小类配置
-tag: powerline bash vim
+tag: 
+- powerline
+- bash
+- vim
 ---
 
 * content
