@@ -68,7 +68,6 @@ BIOS选择自由选择显卡
 
 `sudo ubuntu-drivers devices`
 
-![显卡信息](https://striker.teambition.net/thumbnail/110oe8cb536d1fe770c5cfd69248ff30708a/w/400/h/141)
 ![显卡信息]({{'/images/graphics card info.png'}})
 
 ```bash
@@ -82,7 +81,7 @@ sudo apt-get -y install freeglut3-dev
 *也可以在[界面安装](https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia)或去[官网](http://www.nvidia.com/Download/index.aspx?lang=en-us)查看适合自己显卡的驱动*
 安装成功后需要重启生效，并通过命令`nvidia-smi`检测是否安装成功
 
-![安装成功](https://striker.teambition.net/thumbnail/110o1b92c1b83228f6a943eb153e02060866/w/400/h/205)
+![安装成功]({{ '/images/installed.png' }})
 
 ## 1.3 安装CUDA
 CUDA是NVIDIA的编程语言平台，想使用GPU就必须要使用cuda。
@@ -91,7 +90,7 @@ CUDA是NVIDIA的编程语言平台，想使用GPU就必须要使用cuda。
 ### 1.3.1 检查需要的版本
 [NVIDIA CUDA INSTALLATION GUIDE FOR LINUX](http://developer.download.nvidia.com/compute/cuda/8.0/secure/prod/docs/sidebar/CUDA_Installation_Guide_Linux.pdf?autho=1483409954_8c3dc5eab67a57c32f10f698695fed79&file=CUDA_Installation_Guide_Linux.pdf)
 
- ![CUDA8.0支持列表](https://striker.teambition.net/thumbnail/110o4f2557d7cdccaad549b36f8622bbf3be/w/600/h/457) 
+ ![CUDA8.0支持列表]({{ '/images/native linux distribution support in cuda8.png' }}) 
 
 检测内核版本：`uname -r`
 检测gcc版本：`gcc -v`  
@@ -124,7 +123,7 @@ wget下载后可能需要改名字
 
 `mv cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb`
 
-![CUDA下载](https://striker.teambition.net/thumbnail/110o0c49ac08f249a344a1e692b86223d1b6/w/600/h/480)
+![CUDA下载]({{ '/images/cuda download.png' }})
 
 这里选择的deb安装包
 
@@ -195,13 +194,13 @@ cd bin/x86_64/linux/release
 
 如果现实一些关于GPU的信息，则说明安装成功。
 
-![显示结果](https://striker.teambition.net/thumbnail/110o780b388bbdfbdc4abe03bfa22b8b84c0/w/600/h/541)
+![显示结果]({{ '/images/gpu info.png' }})
 
 ## 1.4 配置cuDNN
 cuDNN是GPU加速计算深层神经网络的库。
 首先去[官网](https://developer.nvidia.com/rdp/cudnn-download)下载cuDNN,需要注册一个账号才能下载。
 
-![cuDNN下载](https://striker.teambition.net/thumbnail/110o8bcc97fa42105aec9f4034bd41d9d052/w/800/h/651) 
+![cuDNN下载]({{ '/images/cudnn download.png' }}) 
 
 下载cuDNN5.1之后进行解压和复制
 
