@@ -37,7 +37,7 @@ tag: Caffe
 ## 1.1 安装相关依赖项
 在Terminal中安装依赖项
 
-```terminal
+```shell
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y build-essential cmake git pkg-config
