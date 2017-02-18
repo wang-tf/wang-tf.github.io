@@ -62,19 +62,19 @@ sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
 BIOS选择自由选择显卡
 安装之前先卸载已经存在的驱动版本：
 
-```sh
+```Shell
 sudo apt-get remove --purge nvidia*
 ```
 
 查看哪一个专有驱动是推荐安装的
 
-```sh
+```Shell
 sudo ubuntu-drivers devices
 ```
 
 ![显卡信息]({{'/images/graphics card info.png'}})
 
-```bash
+```ShellSession
 sudo add-apt-repository ppa:graphics-drivers  #添加官方源
 sudo apt-get update  #刷新软件库
 sudo apt-get -y install nvidia-367  #这里选择推荐的驱动
@@ -102,7 +102,7 @@ CUDA是NVIDIA的编程语言平台，想使用GPU就必须要使用cuda。
 
 [这个博客](http://blog.csdn.net/striker_v/article/details/51920627)可以将默认的gcc-5.4改为5.3
 
-```bash session
+```Shell
 wget http://mirrors.concertpass.com/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.gz
 tar -zxvf gcc-5.3.0.tar.gz
 cd gcc-5.3.0                    //进入解包后的gcc文件夹
@@ -122,12 +122,12 @@ g++ --version
 ### 1.3.2 下载CUDA
 首先在[官网](https://developer.nvidia.com/cuda-downloads)下载CUDA，或：
 
-```shell
+```Shell
 wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
 ```
 wget下载后可能需要改名字
 
-```shell
+```Shell
 mv cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb
 ```
 
@@ -140,13 +140,13 @@ mv cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb cuda-repo-ubuntu1604-8-0-lo
 在BIOS设置里选择用Intel显卡来显示或作为主要显示设备
 进入Ubuntu后按 ctrl+alt+F1 或直接远程登陆，登入自己的账号，然后输入以下命令
 
-```shell
+```Shell
 sudo service lightdm stop
 ```
 
 安装，执行以下命令：
 
-```shell
+```Shell
 sudo dpkg -i cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb
 sudo apt-get update
 sudo apt-get install cuda
@@ -154,7 +154,7 @@ sudo apt-get install cuda
 
 将路径加入PATH
 
-```shell
+```Shell
 export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
 ```
 
@@ -165,7 +165,7 @@ export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
 
 `nvcc --version  #会提示安装toolkit，因未配置路径` 
 
-```shell
+```Shell
 sudo vim /etc/bash.bashrc
 #在结尾添加如下三行
 
@@ -188,7 +188,7 @@ nvcc --version   #或用 nvcc -V
 然后重启系统
 安装samples测试,也可以跳过
 
-```shell
+```Shell
 cuda-install-samples-8.0.sh <target_path> #target_path为例子将要保存的位置`
 cd <sample_dir>
 make  #如果报gcc版本错误，按路径将报错行注释掉（如/usr/local/cuda-8.0/include/host_config.h）
@@ -197,7 +197,7 @@ make  #如果报gcc版本错误，按路径将报错行注释掉（如/usr/local
 运行结束后会显示 `Finished building CUDA samples`
 测试CUDA的samples
 
-```shell
+```Shell
 cd /usr/local/cuda-8.0/samples/
 sudo make all -j16
 cd bin/x86_64/linux/release
@@ -216,7 +216,7 @@ cuDNN是GPU加速计算深层神经网络的库。
 
 下载cuDNN5.1之后进行解压和复制
 
-```shell
+```Shell
 mv cudnn-8.0-linux-x64-v5.1.solitairetheme8 cudnn-8.0-linux-x64-v5.1.tgz
 tar -xvf cudnn-8.0-linux-x64-v5.1.tgz
 cd ./cuda/include
@@ -236,7 +236,7 @@ sudo chmod a+r /usr/local/cuda-8.0/libcudnn*  #通常已经有r权限
 官网下载的不支持CUDA8.0，从 [https://github.com/opencv/opencv](https://github.com/opencv/opencv) 下载Opencv,并将其解压到你要安装的位置，假设解压到了/home/opencv。
 安装前准备，创建编译文件夹：
 
-```shell
+```Shell
 sudo git clone https://github.com/daveselinger/opencv  #这个网页提供了可使用cuda8.0的opencv3.1
 sudo git checkout 3.1.0-with-cuda8   #这步没有操作也编译通过了
 cd opencv/
@@ -248,7 +248,7 @@ make -j $(($(nproc) + 1))
 
 以上只是将opencv编译成功，还没将opencv安装，需要运行下面指令进行安装：
 
-```shell
+```Shell
 sudo make install
 sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
@@ -262,7 +262,7 @@ sudo apt-get update
 ### 1.6.1 下载
 在 [https://github.com/BVLC/caffe](https://github.com/BVLC/caffe) 上下载，解压到合适位置，如根目录
 
-```shell
+```Shell
 git clone https://github.com/BVLC/caffe.git #下载
 cd ~/caffe #进入下载好的目录
 cp Makefile.config.example Makefile.config
@@ -307,7 +307,7 @@ sudo vim Makefile.config
 
 >//#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
 
-```shell
+```Shell
 # 解决hdf5的报错
 cd /usr/lib/x86_64-linux-gnu
 sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
@@ -316,14 +316,14 @@ sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
 
 安装python依赖项（可能非必需）
 
-```shell
+```Shell
 cd python
 for req in $(cat requirements.txt); do sudo -H pip install $req --upgrade; done
 ```
 
 然后编译
 
-```shell
+```Shell
 cd .. #进入caffe主目录
 make all -j $(($(nproc) + 1))
 make test
@@ -338,7 +338,7 @@ make distribute
 # 2 测试
 下载数据预处理和重建lmdb文件
 
-```shell
+```Shell
 cd $CAFFE_ROOT
 ./data/mnist/get_mnist.sh
 ./examples/mnist/create_mnist.sh
@@ -373,7 +373,7 @@ cd $CAFFE_ROOT
 ## 3.2 "libcudart.so.8.0 cannot open shared object file: No such file or directory"
 解决办法是将一些文件复制到/usr/local/lib文件夹下：
 
-```
+```Shell
 #注意自己CUDA的版本号！
 sudo cp /usr/local/cuda-8.0/lib64/libcudart.so.8.0 /usr/local/lib/libcudart.so.8.0 && sudo ldconfig
 sudo cp /usr/local/cuda-8.0/lib64/libcublas.so.8.0 /usr/local/lib/libcublas.so.8.0 && sudo ldconfig
