@@ -1,7 +1,7 @@
 ---
 layout: post
 #标题配置
-title:  caffe：配置-Ubuntu16.04_64-+-CUDA8.0
+title:  caffe配置：Ubuntu16.04_64+CUDA8.0
 #时间配置
 date:   2017-01-15 01:08:00 +0800
 #大类配置
@@ -37,7 +37,7 @@ tag: Caffe
 ## 1.1 安装相关依赖项
 在Terminal中安装依赖项
 
-``` bash
+```ruby
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y build-essential cmake git pkg-config
@@ -70,7 +70,7 @@ BIOS选择自由选择显卡
 
 ![显卡信息]({{'/images/graphics card info.png'}})
 
-```bash
+```java
 sudo add-apt-repository ppa:graphics-drivers  #添加官方源
 sudo apt-get update  #刷新软件库
 sudo apt-get -y install nvidia-367  #这里选择推荐的驱动
