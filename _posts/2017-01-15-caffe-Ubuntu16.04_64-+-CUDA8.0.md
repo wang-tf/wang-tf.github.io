@@ -271,40 +271,27 @@ sudo vim Makefile.config
 
 对Makefile.config文件进行修改
 
->USE_CUDNN := 1
-
->PYTHON_INCLUDE := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include
-
->WITH_PYTHON_LAYER := 1
-
->CUDA_DIR := /usr/local/cuda-8.0
-
->OPENCV_VERSION := 3
-
->INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial
-
+>USE_CUDNN := 1  
+>PYTHON_INCLUDE := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include  
+>WITH_PYTHON_LAYER := 1  
+>CUDA_DIR := /usr/local/cuda-8.0  
+>OPENCV_VERSION := 3  
+>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial  
 >LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
 
 修改完成后保存退出
 
->`sudo vim Makefile #做如下修改：`
-
->将409行：
-
->NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)
-
->替换为：
-
+>`sudo vim Makefile #做如下修改：`  
+>将409行：  
+>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)  
+>替换为：  
 >NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
 
 
->`sudo vim /usr/local/cuda/include/host_config.h`
-
->将
->\#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
-
->改为
-
+>`sudo vim /usr/local/cuda/include/host_config.h`  
+>将  
+>\#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!  
+>改为  
 >//#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
 
 ```Shell
@@ -352,9 +339,9 @@ cd $CAFFE_ROOT
 
 * step1:在Makefile.config文件的第85行，添加/usr/include/hdf5/serial/ 到 INCLUDE_DIRS，也就是把下面第一行代码改为第二行代码。
 
->将：
->INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
->替换为：
+>将：  
+>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include  
+>替换为：  
 >INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
 
 * stept2:在Makefile文件的第173行，把 hdf5_hl 和hdf5修改为hdf5_serial_hl 和 hdf5_serial，也就是把下面第一行代码改为第二行代码。
