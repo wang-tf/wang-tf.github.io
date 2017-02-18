@@ -62,19 +62,19 @@ sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
 BIOS选择自由选择显卡
 安装之前先卸载已经存在的驱动版本：
 
-```shell
+```sh
 sudo apt-get remove --purge nvidia*
 ```
 
 查看哪一个专有驱动是推荐安装的
 
-```shell
+```sh
 sudo ubuntu-drivers devices
 ```
 
 ![显卡信息]({{'/images/graphics card info.png'}})
 
-```shell
+```bash
 sudo add-apt-repository ppa:graphics-drivers  #添加官方源
 sudo apt-get update  #刷新软件库
 sudo apt-get -y install nvidia-367  #这里选择推荐的驱动
@@ -102,7 +102,7 @@ CUDA是NVIDIA的编程语言平台，想使用GPU就必须要使用cuda。
 
 [这个博客](http://blog.csdn.net/striker_v/article/details/51920627)可以将默认的gcc-5.4改为5.3
 
-```shell
+```bash session
 wget http://mirrors.concertpass.com/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.gz
 tar -zxvf gcc-5.3.0.tar.gz
 cd gcc-5.3.0                    //进入解包后的gcc文件夹
