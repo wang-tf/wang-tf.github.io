@@ -26,7 +26,7 @@ tag:
 ![supervised and unsupervised]({{'/images/supervised and unsupervised.png'}})
 # 2. 代价函数（cost function）
 在线性回归中我们有一个像这样的训练集，m 代表了训练样本的数量，比如 m = 47。  
-而我们的假设函数，也就是用来进行预测的函数，是这样的线性函数形式：$$h_{\theta}(x)=\theta_{0}+\theta_{1}x$$  
+而我们的假设函数，也就是用来进行预测的函数，是这样的线性函数形式：{% m %}h_{\theta}(x)=\theta_{0}+\theta_{1}x{% m %}  
 ![linear regression]({{'/images/linear regression.png'}})  
 我们现在要做的便是为我们的模型选择合适的参数（parameters）$\theta_{0}$和$theta_{1}$。我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度，模型所预测的值与训练集中实际值之间的差距（下图中蓝线所指）就是建模误差（modeling error）。   
 ![modeling error]({{'/images/modeling error.png'}})  
