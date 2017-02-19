@@ -22,6 +22,8 @@ highlighter: rouge
 
 # Build settings
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
 
 FB:
   comments :
