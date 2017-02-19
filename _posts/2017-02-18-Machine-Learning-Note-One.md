@@ -28,6 +28,8 @@ tag:
 在线性回归中我们有一个像这样的训练集，m 代表了训练样本的数量，比如 m = 47。  
 而我们的假设函数，也就是用来进行预测的函数，是这样的线性函数形式：$$h<sub>\theta</sub>(x)=\theta<sub>0</sub>+\theta<sub>1</sub>x$$  
 $$A^2$$
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  
+\\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)  
 ![linear regression]({{'/images/linear regression.png'}})
 ## 附录
 - m 代表训练集中实例的数量 
