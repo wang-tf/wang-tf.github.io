@@ -52,7 +52,7 @@ $$\theta_0, \theta_1$$
 Cost Function:$$  
 J(\theta_0, \theta_1)=\frac 1 2m \sum_{i=1}^m (h_{\theta}x^{(i)}-y^{(i)})^2$$  
 Goal:  
-$$\mathop{minimize}\limits_{\theta_0, \theta_1} J(\theta_0, \theta_1)$$  
+$$\mathop{minimize}\varsuplim_{\theta_0, \theta_1} J(\theta_0, \theta_1)$$  
 ![cost function 3d]({{'/images/j_3d.png'}})
 ![hypothesis and cost function]({{'/images/h_j_2.png'}})  
 # 3. 梯度下降算法（gradient descent algorthm）
@@ -62,10 +62,10 @@ $$\theta_j := \theta_j - \alpha\frac {\partial} {\partial \theta_j} J(\theta_0, 
 }  
 其中 α 是学习率（learning rate），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。其中 α 不能太大也不能太小：太大可能会导致发散；太小可能会使训练时间变得很长。  
 在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新 θ0 和 θ1 。  
->temp0 := \theta_0 - \alpha\frac {\partial} {\partial \theta_0} J(\theta_0, \theta_1)  
-temp1 := \theta_1 - \alpha\frac {\partial} {\partial \theta_1} J(\theta_0, \theta_1)  
-\theta_0 := temp0  
-\theta_1 := temp1  
+>$$temp0 := \theta_0 - \alpha\frac {\partial} {\partial \theta_0} J(\theta_0, \theta_1)$$  
+$$temp1 := \theta_1 - \alpha\frac {\partial} {\partial \theta_1} J(\theta_0, \theta_1)$$  
+$$\theta_0 := temp0$$  
+$$\theta_1 := temp1$$  
 
 在梯度下降算法中，这是正确实现同时更新的方法。我不打算解释为什么你需要同时更新，同时更新是梯度下降中的一种常用方法。我们之后会讲到，同步更新是更自然的实现方法。当人们谈到梯度下降时，他们的意思就是同步更新。  
 
