@@ -28,13 +28,47 @@ tag:
 在线性回归中我们有一个像这样的训练集，m 代表了训练样本的数量，比如 m = 47。  
 而我们的假设函数，也就是用来进行预测的函数，是这样的线性函数形式：$h_{\theta}(x)=\theta_{0}+\theta_{1}x$  
 ![linear regression]({{'/images/linear regression.png'}})  
-我们现在要做的便是为我们的模型选择合适的参数（parameters）$\theta_{0}$和$theta_{1}$。我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度，模型所预测的值与训练集中实际值之间的差距（下图中蓝线所指）就是建模误差（modeling error）。   
+我们现在要做的便是为我们的模型选择合适的参数（parameters）$\theta_{0}$和$\theta_{1}$。我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度，模型所预测的值与训练集中实际值之间的差距（下图中蓝线所指）就是建模误差（modeling error）。   
 ![modeling error]({{'/images/modeling error.png'}})  
 我们的目标便是选择出可以使得建模误差的平方和能够最小的模型参数。即使得代价函数$$J(\theta_{0},\theta_{1})=\frac 1 2m \sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})^2$$最小。  
-我们绘制一个等高线图，三个坐标分别为$\theta_{0}$,$\theta_{1}$和$J(\theta_{0},\theta_{1})$： 
+我们绘制一个等高线图，三个坐标分别为$\theta_{0}$，$\theta_{1}$和$J(\theta_{0},\theta_{1})$： 
 ![j(theta0,theta1)]({{'/images/j(theta0theta1).png'}})  
-则可以看出在三维空间中存在一个使得 J(θ0,θ1)最小的点。  
+则可以看出在三维空间中存在一个使得$J(\theta_{0},\theta_{1})$最小的点。  
 代价函数也被称作平方误差函数，有时也被称为平方误差代价函数。我们之所以要求出误差的平方和，是因为误差平方代价函数，对于大多数问题，特别是回归问题，都是一个合理的选择。还有其他的代价函数也能很好地发挥作用，但是平方误差代价函数可能是解决回归问题最常用的手段了。  
+>Hypothesis:  
+$$h_{\theta}x= \theta_1$$  
+Parameters:  
+$$\theta_1$$  
+Cost Function:$$  
+J(\theta_1)=\frac 1 2m \sum_{i=1}^m (h_{\theta}x^{(i)}-y^{(i)})^2$$  
+Goal:  
+$$\minimize_{\theta_1} J(\theta_1)$$  
+![hypothesis and cost function]({{'/images/h_j_1.png'}})  
+
+>Hypothesis:  
+$$h_{\theta}x=\theta_0 + \theta_1$$  
+Parameters:  
+$$\theta_0, \theta_1$$  
+Cost Function:$$  
+J(\theta_0, \theta_1)=\frac 1 2m \sum_{i=1}^m (h_{\theta}x^{(i)}-y^{(i)})^2$$  
+Goal:  
+$$\minimize_{\theta_0, \theta_1} J(\theta_0, \theta_1)$$  
+![cost function 3d]({{'/images/j_3d.png'}})
+![hypothesis and cost function]({{'/images/h_j_2.png'}})  
+# 3. 梯度下降算法（gradient descent algorthm）
+批量梯度下降（batch gradient descent）算法的公式为：  
+repeat untill convergence{  
+$$\theta_j := \theta_j - \alpha\frac {\partial} {\partial \theta_j} J(\theta_0, \theta_1)     for( i = 0 and j = 1 )$$
+}  
+其中 α 是学习率（learning rate），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。其中 α 不能太大也不能太小：太大可能会导致发散；太小可能会使训练时间变得很长。  
+在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新 θ0 和 θ1 。  
+>temp0 := \theta_0 - \alpha\frac {\partial} {\partial \theta_0} J(\theta_0, \theta_1)  
+temp1 := \theta_1 - \alpha\frac {\partial} {\partial \theta_1} J(\theta_0, \theta_1)  
+\theta_0 := temp0  
+\theta_1 := temp1  
+
+在梯度下降算法中，这是正确实现同时更新的方法。我不打算解释为什么你需要同时更新，同时更新是梯度下降中的一种常用方法。我们之后会讲到，同步更新是更自然的实现方法。当人们谈到梯度下降时，他们的意思就是同步更新。  
+
 ## 附录
 - m 代表训练集中实例的数量 
 - x 代表特征/输入变量 
