@@ -42,7 +42,7 @@ $$\theta_1$$
 Cost Function:$$  
 J(\theta_1)=\frac 1 2m \sum_{i=1}^m (h_{\theta}x^{(i)}-y^{(i)})^2$$  
 Goal:  
-$$\minimize_{\theta_1} J(\theta_1)$$  
+$$\minimize \limits_{\theta_1} J(\theta_1)$$  
 ![hypothesis and cost function]({{'/images/h_j_1.png'}})  
 
 >Hypothesis:  
@@ -52,7 +52,7 @@ $$\theta_0, \theta_1$$
 Cost Function:$$  
 J(\theta_0, \theta_1)=\frac 1 2m \sum_{i=1}^m (h_{\theta}x^{(i)}-y^{(i)})^2$$  
 Goal:  
-$$\minimize_{\theta_0, \theta_1} J(\theta_0, \theta_1)$$  
+$$\minimize \limits_{\theta_0, \theta_1} J(\theta_0, \theta_1)$$  
 ![cost function 3d]({{'/images/j_3d.png'}})
 ![hypothesis and cost function]({{'/images/h_j_2.png'}})  
 # 3. 梯度下降算法（gradient descent algorthm）
