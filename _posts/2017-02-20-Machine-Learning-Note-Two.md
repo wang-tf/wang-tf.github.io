@@ -48,11 +48,11 @@ $$
 这样构建的$Cost(h_{\theta}(x),y)$函数的特点是：当实际的 y=1 且 $h_\theta$也为 1 时误差为 0，当 y=1 但 $h_\theta$不为 1 时误差随着 $h_\theta$ 的变小而变大；当实际的 y=0 且 hθ 也为 0 时代价为 0，当 y=0 但 $h_\theta$不为 0 时误差随着 $h_\theta$ 的变大而变大。  
 将构建的$Cost(h_{\theta}(x),y)$简化并代入函数后得到：  
 $$
-\begin{center}
+\[
 \begin{equation}
 J(\theta) = -\frac 1 m [\sum_{i=1}^m y^{(i)}logh_{\theta}(x^{(i)}+(1-y^{(i)})log(1-h_{\theta}(x^{(i))})]
 \end{equation}
-\end{center}
+\]
 $$  
 在得到这样一个代价函数以后，我们便可以用梯度下降算法来求得能使代价函数最小的参数了。算法为：  
 >
