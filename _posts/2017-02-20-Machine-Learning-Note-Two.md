@@ -48,20 +48,22 @@ $$
 这样构建的$Cost(h_{\theta}(x),y)$函数的特点是：当实际的 y=1 且 $h_\theta$也为 1 时误差为 0，当 y=1 但 $h_\theta$不为 1 时误差随着 $h_\theta$ 的变小而变大；当实际的 y=0 且 hθ 也为 0 时代价为 0，当 y=0 但 $h_\theta$不为 0 时误差随着 $h_\theta$ 的变大而变大。  
 将构建的$Cost(h_{\theta}(x),y)$简化并代入函数后得到：  
 $$
+\begin{center}
 \begin{equation}
 J(\theta) = -\frac 1 m [\sum_{i=1}^m y^{(i)}logh_{\theta}(x^{(i)}+(1-y^{(i)})log(1-h_{\theta}(x^{(i))})]
 \end{equation}
+\end{center}
 $$  
 在得到这样一个代价函数以后，我们便可以用梯度下降算法来求得能使代价函数最小的参数了。算法为：  
 >
-Repeat
-    $\theta_j := \theta_j - \alpha\frac \partical {\partial \theta_j} J(\theta)$  
+Repeat  \\
+    $\theta_j := \theta_j - \alpha\frac \partial {\partial \theta_j} J(\theta)$  \\
                                     (simultanemously update all)
 
 求导后得到：  
 >
-Repeat
-    $\theta_j := \theta_j - \alpha \sum_{i=1}^m (h_\theta (x^{(i)})-y^{(i)})x_{j}^{(i)}$  
+Repeat  \\
+    $\theta_j := \theta_j - \alpha \sum_{i=1}^m (h_\theta (x^{(i)})-y^{(i)})x_{j}^{(i)}$  \\
                                     (simultanemously update all)
 
 虽然得到的梯度下降算法表面上看上去与线性回归的梯度下降算法一样，**但是这里的 $h_\theta (x)=g(\theta_{T}x)$与线性回归中不同，所以实际上是不一样的**。另外，在运行梯度下降算法之前，进行特征缩放依旧是非常必要的。
