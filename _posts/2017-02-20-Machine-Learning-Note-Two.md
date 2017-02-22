@@ -105,16 +105,28 @@ $$
 
 可以看出，正则化线性回归的梯度下降算法的变化在于，每次都在原有算法更新规则的基础上令 θ 值减少了一个额外的值。  
 我们同样也可以利用正规方程来求解正则化线性回归模型，方法如下所示：  
-$$\theta = (X^{T}X + \lambda )^{-1}$$
-
-## 正则化逻辑回归
-$$
+$$\theta = (X^{T}X + \lambda 
 \left[
 \begin{matrix}
- 1      & 2      & \cdots & 4      \\
- 7      & 6      & \cdots & 5      \\
- \vdots & \vdots & \ddots & \vdots \\
- 8      & 9      & \cdots & 0      \\
+ 0      &        &        &        &        \\
+        & 1      &        &        &        \\
+        &        & 1      &        &        \\
+        &        &        & \ddots &        \\
+        &        &        &        & 1      \\
 \end{matrix}
 \right]
+)^{-1}$$  
+图中的矩阵尺寸为 (n+1)*(n+1)。 
+
+## 正则化逻辑回归
+我们也给代价函数增加一个正则化的表达式，得到代价函数:  
 $$
+\theta_j := -[ \frac 1 m \sum_{i=1}^m ( y^{(i)} \times log(h_{\theta}(x^{(i)})) + (1- y^{(i)}) \times log(1-h_{\theta}(x^{(i)})) ) +  \frac 1 2m  \sum_{j=1}^n \theta_j^2
+$$  
+要最小化该代价函数，通过求导，得出梯度下降算法为：  
+>Repeat until convergence{  
+$$
+\theta_0 := \theta_0 - \alpha \frac 1 m \sum_{i=1}^m ((h_{\theta}(x^{(i)})- y^{(i)})\cdot x_0^{(i)})$$  \\
+\theta_j := \theta_j - \alpha \frac 1 m \sum_{i=1}^m (h_{\theta}(x^{(i)})- y^{(i)})\cdot x_j^{(i)} + \frac \lambda m \theta_j)     \\     for j=1,2,...n \\
+$$  
+}  
