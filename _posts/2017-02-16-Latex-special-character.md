@@ -10,4 +10,14 @@ tag: 字符
 {:toc}
 
 
-http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html
+## 特殊符号
+[http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html](http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html)  
+$\alpha$ \alpha  
+$\lambda$ \lambda  
+$\cdot$ \cdot  
+
+## 矩阵的显示
+[http://blog.csdn.net/bendanban/article/details/44221279](http://blog.csdn.net/bendanban/article/details/44221279)  
+
+## 常用符号
+$\frac {1} {2}$ \frac {1} {2}  
