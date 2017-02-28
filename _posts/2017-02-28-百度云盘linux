@@ -1,0 +1,44 @@
+ ## 1、安装
+在github上下载 .deb 安装包
+下载地址：[https://github.com/LiuLang/bcloud-packages](https://github.com/LiuLang/bcloud-packages)
+下载完成双击安装文件安装成功。
+ 
+## 2、解决验证码问题
+(1) 控制台输入命令 dpkg -S bcloud | grep "SigninDialog.py"  查找SigninDialog.py文件。 sudo gedit   xx/xx/SigninDialog.py编辑这个文件
+（2）
+SigninDialog.py的第322行和386行：
+>if not verifycode or len(verifycode) != 4:
+
+改为
+>if not verifycode:
+
+SigninDialog.py的第118行：
+>def on_vcode_confirm_clicked(self, button):
+>self.check_entry()
+
+改为
+>def on_vcode_confirm_clicked(self, button):
+>self.response(Gtk.ResponseType.OK)
+
+SigninDialog.py第315行左右的
+>tokens['token']
+
+改为
+>tokens
+ 
+## 3、解决网络错误问题
+
+Step1: `sudo gedit /usr/lib/python3/dist-packages/bcloud/auth.py`
+Do: 在get_bdstoken函数的if req:前添加一行输入"cookie.load_list(req.headers.get_all('Set-Cookie'))"
+
+Step2: `sudo gedit /usr/lib/python3/dist-packages/bcloud/pcs.py`
+Do: 所有cookie.sub_output()，无论原来几个参数，都在末尾加上,'SCRC','STOKEN'
+例: 'Cookie': cookie.sub_output('BAIDUID', 'BDUSS', 'PANWEB', 'cflag', 'SCRC', 'STOKEN'),
+
+Step3: 删除配置数据和缓存
+```Shell
+sudo rm -rf ~/.config/bcloud/*
+sudo rm -rf ~/.cache/bcloud/*
+```
+
+Step4: 重新运行Bcloud
