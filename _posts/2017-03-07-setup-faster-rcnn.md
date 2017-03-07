@@ -14,18 +14,18 @@ tag: FasterRCNN
 {:toc}
 
 
-## 安装前的准备
+## 1. 安装前的准备
 首先你应该已经安装了如下三个组件：cython, python-opencv, easydict
 
-## 开始安装
-1. 下载文件
+## 2. 开始安装
+### 2.1. 下载文件
 ```shell
 git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git
 cd $FRCN_ROOT/lib
 make
 ```
 
-2. 修改文件
+### 2.2. 修改文件
 然后进入下一个目录
 ```shell
 cd ../caffe-fast-rcnn
@@ -48,7 +48,7 @@ vim ./src/caffe/test/test_smooth_L1_loss_layer.cpp
 注释掉第11行
 >`#include "caffe/vision_layers.hpp"   // 用 // 注释掉 或 删除`
 
-3. 编译
+### 2.3. 编译
 然后开始编译
 
 ```shell
@@ -64,7 +64,7 @@ make runtest
 make pycaffe
 ```
 
-## 测试demo
+## 3.测试demo
 
 ```
 cd $FRCN_ROOT
