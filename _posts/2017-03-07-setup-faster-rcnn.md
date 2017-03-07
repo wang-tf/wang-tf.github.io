@@ -31,7 +31,7 @@ make
 cd ../caffe-fast-rcnn
 ```
 
-**Makefile.config文件的修改可以参照[另一篇博客](https://wang-tf.github.io/2017/01/14/caffe-Ubuntu16.04_64-+-CUDA8.0/)，这里不再赘述**
+**Makefile.config文件的修改可以参照[另一篇博客](https://wang-tf.github.io/2017/01/14/caffe-Ubuntu16.04_64-+-CUDA8.0/)，这里不再赘述**  
 **因其不支持cudnn5.0，因此需要做些修改。**
 从caffe的git上下载对应文件的最新的版本放到下面相应的目录里
 ```shell
@@ -50,6 +50,7 @@ vim ./src/caffe/test/test_smooth_L1_loss_layer.cpp
 
 3. 编译
 然后开始编译
+
 ```shell
 # compile Caffe modules
 make -j8 all  
@@ -64,6 +65,7 @@ make pycaffe
 ```
 
 ## 测试demo
+
 ```
 cd $FRCN_ROOT
 ./data/scripts/fetch_faster_rcnn_models.sh  //可能会提示已经存在，不需要下载
