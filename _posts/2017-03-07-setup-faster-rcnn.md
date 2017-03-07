@@ -46,7 +46,7 @@ vim ./src/caffe/test/test_smooth_L1_loss_layer.cpp
 ```
 
 注释掉第11行
->#include "caffe/vision_layers.hpp"   // 用 // 注释掉 或 删除
+>`#include "caffe/vision_layers.hpp"   // 用 // 注释掉 或 删除`
 
 3. 编译
 然后开始编译
