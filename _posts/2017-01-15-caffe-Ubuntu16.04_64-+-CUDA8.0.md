@@ -50,12 +50,11 @@ sudo apt-get install -y python-pip
 # (Python 2.7 development files)
 sudo apt-get install -y python-dev python-numpy python-scipy
 #opencv3.1依赖库
-sudo apt-get install --assume-yes build-essential cmake git
-sudo apt-get install --assume-yes build-essential pkg-config unzip ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
-sudo apt-get install --assume-yes libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
-sudo apt-get install --assume-yes libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
-sudo apt-get install --assume-yes libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
-sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
+sudo apt-get install -y unzip ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
+sudo apt-get install -y libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
+sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
+sudo apt-get install -y libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
+sudo apt-get install -y libvorbis-dev libxvidcore-dev v4l-utils
 ```
 
 ## 1.2 安装NVIDIA驱动
