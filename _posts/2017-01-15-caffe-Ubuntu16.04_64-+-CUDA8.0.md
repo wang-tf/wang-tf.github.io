@@ -227,7 +227,7 @@ sudo rm -rf libcudnn.so libcudnn.so.5    #删除原有动态文件
 sudo ln -s libcudnn.so.5.1.5 libcudnn.so.5  #生成软衔接
 sudo ln -s libcudnn.so.5 libcudnn.so      #生成软链接
 sudo chmod a+r /usr/local/cuda-8.0/include/cudnn.h
-sudo chmod a+r /usr/local/cuda-8.0/libcudnn*  #通常已经有r权限
+sudo chmod a+r /usr/local/cuda-8.0/lib64/libcudnn*  #通常已经有r权限
 ```
  
 ## 1.5 安装opencv3.1 *（3.2会在编译到40%的时候报错，未能解决）*
