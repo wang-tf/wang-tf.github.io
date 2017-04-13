@@ -35,7 +35,7 @@ cd ../caffe-fast-rcnn
 **因其不支持cudnn5.0，因此需要做些修改。**
 从caffe的git上下载对应文件的最新的版本放到下面相应的目录里
 ```shell
-cp caffe/inlude/caffe/layers/cudnn_* caffe-fast-rcnn/include/caffe/layers/
+cp caffe/include/caffe/layers/cudnn_* caffe-fast-rcnn/include/caffe/layers/
 cp caffe/src/caffe/layers/cudnn_* caffe-fast-rcnn/src/caffe/layers/
 cp caffe/include/caffe/util/cudnn.hpp caffe-fast-rcnn/include/caffe/util/
 ```
