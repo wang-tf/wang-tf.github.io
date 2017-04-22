@@ -1,12 +1,8 @@
 ---
 layout: post
-#标题配置
-title:  安装配置Faster-RCNN
-#时间配置
-date:   2017-03-07 14：00：00
-#大类配置
-categories: 深度学习
-#小类配置
+title: 安装配置Faster-RCNN
+date: 2017-03-07 14：00：00
+categories: 机器学习
 tag: FasterRCNN
 ---
 
