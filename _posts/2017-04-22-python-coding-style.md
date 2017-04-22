@@ -10,9 +10,8 @@ tag: python
 {:toc}
 
 
-
 ---
-官方指南：[https://www.python.org/dev/peps/pep-0008/](https://www.python.org/dev/peps/pep-0008/)
+官方指南：[https://www.python.org/dev/peps/pep-0008/](https://www.python.org/dev/peps/pep-0008/)  
 google指南:[https://code.google.com/archive/p/soc/wikis/PythonStyleGuide.wiki](https://code.google.com/archive/p/soc/wikis/PythonStyleGuide.wiki)
 ---
 
