@@ -5,7 +5,7 @@ title:  caffe配置：Ubuntu16.04_64+CUDA8.0
 #时间配置
 date:   2017-01-15 01:08:00 +0800
 #大类配置
-categories: 深度学习
+categories: 机器学习
 #小类配置
 tag: Caffe
 ---
