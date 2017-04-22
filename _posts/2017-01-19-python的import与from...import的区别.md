@@ -1,15 +1,10 @@
 ---
 layout: post
-#标题配置
-title:  python的import与from...import的区别
-#时间配置
-date:   2017-01-15 01:08:00 +0800
-#大类配置
-categories: linux
-#小类配置
+title: python的import与from...import的区别
+date: 2017-01-15 01:08:00 +0800
+categories: Linux
 tag: 
-- python
-- import
+- 方法技巧
 ---
 
 * content
