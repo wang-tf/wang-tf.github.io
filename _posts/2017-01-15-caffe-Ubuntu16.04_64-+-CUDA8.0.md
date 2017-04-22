@@ -47,9 +47,9 @@ sudo apt-get install -y --no-install-recommends libboost-all-dev
 sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev
 # pip
 sudo apt-get install -y python-pip
-# (Python 2.7 development files)
+# Python 2.7 development files
 sudo apt-get install -y python-dev python-numpy python-scipy
-#opencv3.1依赖库
+# opencv3.1依赖库
 sudo apt-get install -y unzip ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
 sudo apt-get install -y libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
 sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
@@ -119,7 +119,7 @@ g++ --version
 ```
 
 ### 1.3.2 下载CUDA
-首先在[官网](https://developer.nvidia.com/cuda-downloads)下载CUDA，或：
+首先在[官网](https://developer.nvidia.com/cuda-downloads)下载CUDA(建议使用local run文件安装，deb安装会重装nvidia驱动)，或：
 
 ```Shell
 wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
@@ -152,18 +152,6 @@ sudo apt-get install cuda
 ```
 
 将路径加入PATH
-
-```Shell
-export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
-```
-
-然后重新启动 `sudo reboot now` 或 直接启动图形界面 `sudo /etc/init.d/lightdm  start`
-
-### 1.3.4检测CUDA
-检查cuda是否配置好,在命令行中执行以下命令。
-
-`nvcc --version  #会提示安装toolkit，因未配置路径` 
-
 ```Shell
 sudo vim /etc/bash.bashrc
 #在结尾添加如下三行
@@ -181,21 +169,16 @@ sudo vim ~/.bashrc
 >export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 source ~/.bashrc
-nvcc --version   #或用 nvcc -V
 ```
+
+然后重新启动 `sudo reboot now` 或 直接启动图形界面 `sudo /etc/init.d/lightdm  start`
+
+### 1.3.4检测CUDA
+检查cuda是否配置好,在命令行中执行以下命令。
+`nvcc --version  #会提示安装toolkit，` 
 
 然后重启系统
 安装samples测试,也可以跳过
-
-```Shell
-cuda-install-samples-8.0.sh <target_path> #target_path为例子将要保存的位置`
-cd <sample_dir>
-make  #如果报gcc版本错误，按路径将报错行注释掉（如/usr/local/cuda-8.0/include/host_config.h）
-```
-
-运行结束后会显示 `Finished building CUDA samples`
-测试CUDA的samples
-
 ```Shell
 cd /usr/local/cuda-8.0/samples/
 sudo make all -j16
