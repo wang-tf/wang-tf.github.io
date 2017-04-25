@@ -151,9 +151,10 @@ Password:
 
 下面介绍一种简洁有效的设置方式:
 只需要在/etc目录下建立一个nologin文档，那么Linux上的所有用户（除了root以外）都无法登录！！
-[root@host~]# touch /etc/nologin
+`[root@host~]# touch /etc/nologin`
 
 在/etc/nologin（注意：这可不是第一种方式中的nologin.txt）文件里面可以自定义一些内容，告诉用户为何无法登录。
+```
 [root@host~]# cat /etc/nologin
 抱歉，系统维护中，暂时禁止登陆！
 
@@ -170,13 +171,16 @@ Connection closed by 192.168.1.117
 ops@192.168.1.117's password: 
 抱歉，系统维护中，暂时禁止登陆！
 Connection closed by 192.168.1.117
+```
 
 注意一点：
 这种方法设置后，只是禁止了从外部ssh登陆本机时有效！但是在本机上，无论是从root用户还是其他普通用户使用su命令切换到锁定用户下都不受影响。
+```
 [root@host~]# su - ops
 [ops@host~]$ su - wangshibo
 Password: 
 [wangshibo@host~]$
+```
 
 解禁帐号也简单，直接将/etc/nologin删除就行了！
 ```
