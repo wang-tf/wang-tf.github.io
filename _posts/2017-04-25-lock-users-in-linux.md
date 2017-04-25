@@ -14,22 +14,22 @@ tag: 运维
 这种方式会更加人性化一点，因为不仅可以禁止用户登录，还可以在禁用登陆时给提示告诉它这么做的原因。
 `sudo vim /etc/nologin.txt`  
 没有的话就手动新建一个，在里面添加给被禁止用户的提示(这种方式的所有用户的锁定信息都在这个文件中，在登陆时给与提示)。
->
+```
 如下，禁用wang账号登陆系统：
 [root@host~]# useradd wang
 [root@host~]# echo "123456"|passwd --stdin wangshibo
 Changing password for user wangshibo.
 passwd: all authentication tokens updated successfully.
 [root@host~]# cat /etc/passwd | grep wang
-wangshibo:x:500:500::/home/wangshibo:/bin/bash
+wangshibo:x:500:500::/home/wang:/bin/bash
 [root@host~]# sed -i 's#/home/wang:/bin/bash#/home/wang:/sbin/nologin#g' /etc/passwd
 [root@host~]# cat /etc/passwd | grep wang
 wang:x:500:500::/home/wang:/sbin/nologin
->
+
 [root@host-192-168-1-117 ~]# touch /etc/nologin.txt
 [root@host-192-168-1-117 ~]# cat /etc/nologin.txt
 In order to protect the system security, this type of user is locked!
-
+```
 
 现在尝试用wangshibo账号登陆系统，就会被拒绝，并给出提示信息：
 ```
@@ -39,26 +39,29 @@ In order to protect the system security, this type of user is locked!
 [ops@host~]$
 ```
 
->
 解禁用户登陆就是把shell改为它原有的就可以了
+```
 [root@host~]# cat /etc/passwd|grep wang
 wangshibo:x:500:500::/home/wang:/sbin/nologin
 [root@host~]# sed -i 's#/home/wang:/sbin/nologin#/home/wang:/bin/bash#g' /etc/passwd
 [root@host~]# cat /etc/passwd | grep wang
 wang:x:500:500::/home/wang:/bin/bash
->
+
 [root@host~]# su - ops
 [ops@host~]$ su - wang
 Password: 
 [wang@host~]$
+```
 
 ---
 可以使用usermod命令修改用户的shell类型，加-s参数，如
+```
 [root@host~]# cat /etc/passwd | grep wang
 wangshibo:x:500:500::/home/wang:/bin/bash
 [root@host~]# usermod wang -s /sbin/nologin 
 [root@host~]# cat /etc/passwd|grep wang
 wang:x:500:500::/home/wang:/sbin/nologin
+```
 
 另外注意下一个小细节：
 这一种方法，无论是从root用户，还是从其他用户，都不能ssh登陆或su切换到锁定账号下
