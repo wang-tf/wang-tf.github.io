@@ -153,20 +153,21 @@ sudo apt-get install cuda
 
 将路径加入PATH
 ```Shell
+# 修改所有用户的路径
 sudo vim /etc/bash.bashrc
 #在结尾添加如下三行
-
->export CUDA_HOME=/usr/local/cuda-8.0
->export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
->export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export CUDA_HOME=/usr/local/cuda-8.0
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 source /etc/bash.bashrc
+
+# 修改当前用户的路径
 sudo vim ~/.bashrc
 #同样添加这三行
-
->export CUDA_HOME=/usr/local/cuda-8.0
->export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
->export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export CUDA_HOME=/usr/local/cuda-8.0
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 source ~/.bashrc
 ```
@@ -252,29 +253,33 @@ sudo vim Makefile.config
 ```
 
 对Makefile.config文件进行修改
+```
+USE_CUDNN := 1  
 
->USE_CUDNN := 1  
->PYTHON_INCLUDE := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include  
->WITH_PYTHON_LAYER := 1  
->CUDA_DIR := /usr/local/cuda-8.0  
->OPENCV_VERSION := 3  
->INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial  
->LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+PYTHON_INCLUDE := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include  
 
-修改完成后保存退出
+WITH_PYTHON_LAYER := 1  
 
->`sudo vim Makefile #做如下修改：`  
->将409行：  
->NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)  
->替换为：  
->NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
+CUDA_DIR := /usr/local/cuda-8.0  
 
+OPENCV_VERSION := 3  
 
->`sudo vim /usr/local/cuda/include/host_config.h`  
->将  
->\#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!  
->改为  
->//#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial  
+
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+```
+
+对Makefile文件进行修改
+``` 
+#将409行：NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)  替换为：  
+NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
+```
+
+对/usr/local/cuda/include/host_config.h进行修改
+```
+# 将#error-- unsupported GNU version! gcc versions later than 4.9 are not supported! 改为  
+//#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
+```
 
 ```Shell
 # 解决hdf5的报错
@@ -283,7 +288,7 @@ sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
 sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
 ```
 
-安装python依赖项（可能非必需）
+安装python依赖项（非必需）
 
 ```Shell
 cd python
@@ -295,14 +300,19 @@ for req in $(cat requirements.txt); do sudo -H pip install $req --upgrade; done
 ```Shell
 cd .. #进入caffe主目录
 make all -j $(($(nproc) + 1))
-make test
-make runtest
-make pycaffe      -should be finished already, so you can omit this one
+make test  # 报错也不影响使用
+make runtest  # 报错也不影响使用
+make pycaffe   
 make distribute
 ```
 
 将caffe加入python的路径
-`export PYTHONPATH=/path/to/caffe-master/python:$PYTHONPATH`
+```Shell
+sudo vim ~/.bashrc
+#添加
+export PYTHONPATH=/path/to/caffe-master/python:$PYTHONPATH  # 改成自己的路径
+source ~/.bashrc
+```
 
 # 2 测试
 下载数据预处理和重建lmdb文件
