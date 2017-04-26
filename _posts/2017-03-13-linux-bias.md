@@ -2,8 +2,8 @@
 layout: post
 title: ubuntu中最近用到的命令
 data: 2017-03-13 09:15:00
-categories: linux
-tag: shell
+categories: Linux
+tag: 运维
 ---
 
 * content
