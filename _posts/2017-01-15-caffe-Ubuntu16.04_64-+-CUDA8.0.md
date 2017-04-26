@@ -331,13 +331,12 @@ cd $CAFFE_ROOT
 
 * step1:在Makefile.config文件的第85行，添加/usr/include/hdf5/serial/ 到 INCLUDE_DIRS，也就是把下面第一行代码改为第二行代码。
 ```
-将INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include 替换为：  
+#将INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include 替换为：  
 INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
 ```
 * stept2:在Makefile文件的第173行，把 hdf5_hl 和hdf5修改为hdf5_serial_hl 和 hdf5_serial，也就是把下面第一行代码改为第二行代码。
-
 ```
-将LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5 改为：  
+#将LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5 改为：  
 LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
 ```
 
