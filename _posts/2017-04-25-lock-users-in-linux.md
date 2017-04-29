@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下锁定账号
-data: 2017-04-25 12:40:00
+date: 2017-04-25 12:40:00
 categries: Linux
 tag: 运维
 ---
