@@ -1,5 +1,5 @@
 ---
-tpye: post
+layout: post
 title: ubuntu下DNS的修改
 date: 2017-04-25 12:27:00
 categories: Linux
