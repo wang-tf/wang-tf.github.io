@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ubuntu下的PATH
-data: 2017-04-26 11:18:00
+date: 2017-04-26 11:18:00
 categories: Linux
 tag: 运维
 ---
