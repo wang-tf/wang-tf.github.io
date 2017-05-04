@@ -22,8 +22,7 @@ tag: python
 |getpixel(xy)|取像素点值|坐标xy处的pixel value or a sequence of pixel values|
 |histogram(mask=None)|统计直方图|单通道图：返回列表[c0, c1, ...]，ci是值为i的像素数 多通道图：a single sequence that is the concatenation of the sequences for all bands mask参数:a same-sized mask image of mode "1" or "L"(include only those pixels correspond to nonzero pixels in the mask argument)|
 |offset(dx,dy=None)|平移|Returns a new image the same size as the original, but with all pixels rotated dx in the +x direction,and dy in the +y direction. If dy is omitted, it defaults to the same value as dx.|
-|paste(i2,where,mask=None)|粘贴图片|where参数可以是1 (x,y)坐标对：i2的像素点(0,0)对齐原图中的(x,y)粘贴，i2超过原图边界的部分被抛弃
-2 bbox：i2必须和该bounding box大小一致 3 None：i2必须和原图大小一致 如果i2的mode和原图不一致，粘贴前会被转换。mask参数：a same-sized mask image of mode "1","L" or “RGBA ”(control which pixels get replaced)|
+|paste(i2,where,mask=None)|粘贴图片|where参数可以是1 (x,y)坐标对：i2的像素点(0,0)对齐原图中的(x,y)粘贴，i2超过原图边界的部分被抛弃 2 bbox：i2必须和该bounding box大小一致 3 None：i2必须和原图大小一致 如果i2的mode和原图不一致，粘贴前会被转换。mask参数：a same-sized mask image of mode "1","L" or “RGBA ”(control which pixels get replaced)|
 |paste(color,box=None,mask=None)|填充颜色|如果box省略，整个图被填充为color色；mask参数同上|
 |point(function)|改变像素点(函数)|Returns a new image with each pixel modified.|
 |point(table)|改变像素点(查表)|To translate pixels using a table(a sequence of 256n values, where n is the number of bands in the image) lookup|
