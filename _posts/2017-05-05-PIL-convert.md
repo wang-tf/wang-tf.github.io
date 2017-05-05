@@ -13,6 +13,7 @@ tag: python
 ---
 官方文档:[http://effbot.org/imagingbook/](http://effbot.org/imagingbook/)
 ---
+
 对于彩色图像，不管其图像格式是PNG，还是BMP，或者JPG，在PIL中，使用Image模块的open()函数打开后，返回的图像对象的模式都是“RGB”。
 
 而对于灰度图像，不管其图像格式是PNG，还是BMP，或者JPG，打开后，其模式为“L”。
