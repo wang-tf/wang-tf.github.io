@@ -1,15 +1,14 @@
-  ---
-  layout: post
-  title: Python库PIL中的图像格式
-  date: 2017-05-05 15:57
-  categories: 图像处理
-  tag: python
-  ---
-  
-  *contact
-  {:toc}
-  
+---
+layout: post
+title: Python库PIL中的图像格式
+date: 2017-05-05 15:57
+categories: 图像处理
+tag: python
+---
 
+*conent
+{:toc}
+  
 
 对于彩色图像，不管其图像格式是PNG，还是BMP，或者JPG，在PIL中，使用Image模块的open()函数打开后，返回的图像对象的模式都是“RGB”。
 
