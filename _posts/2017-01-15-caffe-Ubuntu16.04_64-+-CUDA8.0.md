@@ -174,8 +174,8 @@ sudo git checkout 3.1.0-with-cuda8   #这步没有操作也编译通过了
 cd opencv/
 mkdir build
 cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUBLAS=ON -DCUDA_NVCC_FLAGS="-D_FORCE_INLINES" ..    
-make -j $(($(nproc) + 1))
+sudo cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUBLAS=ON -DCUDA_NVCC_FLAGS="-D_FORCE_INLINES" ..    
+sudo make -j $(($(nproc) + 1))
 ```
 
 以上只是将opencv编译成功，还没将opencv安装，需要运行下面指令进行安装：
