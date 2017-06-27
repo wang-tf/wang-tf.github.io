@@ -110,7 +110,8 @@ export PATH
 source /etc/profile
 
 # 在 /etc/ld.so.conf.d/加入文件 cuda.conf, 内容如下
-sudo vim ~/.bashrc
+/usr/local/cuda-6.5/lib64
+sudo ldconfig
 #同样添加这三行
 export CUDA_HOME=/usr/local/cuda-8.0
 export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
