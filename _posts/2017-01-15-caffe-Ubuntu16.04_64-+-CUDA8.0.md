@@ -114,7 +114,7 @@ source /etc/profile
 
 在 /etc/ld.so.conf.d/加入文件 cuda.conf, 内容如下
 ```
-/usr/local/cuda-6.5/lib64
+/usr/local/cuda-8.0/lib64
 ```
 然后运行
 ```
