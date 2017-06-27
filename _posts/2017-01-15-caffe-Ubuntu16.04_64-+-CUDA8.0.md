@@ -25,62 +25,13 @@ tag: Caffe
 + CUDA
 + cudnn
 + python 或 matlab（这里只安装python，且在ubuntu16.04中已默认安装2.7版本）
-+ opencv3.1
++udo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler
 
-* * *
-官方指导[https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide](https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide)
-
-* * *
-
-# 1 安装
-
-## 1.1 安装相关依赖项
-在Terminal中安装依赖项
-
-```Shell
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install -y build-essential cmake git pkg-config
-sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler
 sudo apt-get install -y libatlas-base-dev 
 sudo apt-get install -y --no-install-recommends libboost-all-dev
 sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev
 # pip
 sudo apt-get install -y python-pip
-# Python 2.7 development files
-sudo apt-get install -y python-dev python-numpy python-scipy
-# opencv3.1依赖库
-sudo apt-get install -y unzip ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
-sudo apt-get install -y libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
-sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
-sudo apt-get install -y libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
-sudo apt-get install -y libvorbis-dev libxvidcore-dev v4l-utils
-```
-
-## 1.2 安装NVIDIA驱动
-BIOS选择自由选择显卡
-安装之前先卸载已经存在的驱动版本：
-
-```Shell
-sudo apt-get remove --purge nvidia*
-```
-
-查看哪一个专有驱动是推荐安装的
-
-```Shell
-sudo ubuntu-drivers devices
-```
-
-![显卡信息]({{'/images/graphics card info.png'}})
-
-```Shell
-sudo add-apt-repository ppa:graphics-drivers  #添加官方源
-sudo apt-get update  #刷新软件库
-sudo apt-get -y install nvidia-367  #这里选择推荐的驱动
-sudo apt-get -y install mesa-common-dev
-sudo apt-get -y install freeglut3-dev
-```
-
 *也可以在[界面安装](https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia)或去[官网](http://www.nvidia.com/Download/index.aspx?lang=en-us)查看适合自己显卡的驱动*
 安装成功后需要重启生效，并通过命令`nvidia-smi`检测是否安装成功
 
@@ -109,7 +60,7 @@ cd gcc-5.3.0                    //进入解包后的gcc文件夹
 cd ..                          //返回上层目录
 mkdir gcc-build-5.3.0
 cd gcc-build-5.3.0
-../gcc-5.3.0/configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
+../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
 make -j8  //时间较长
 sudo make install
 sudo reboot now  //可能需要重启
@@ -119,23 +70,23 @@ g++ --version
 ```
 
 ### 1.3.2 下载CUDA
-首先在[官网](https://developer.nvidia.com/cuda-downloads)下载CUDA(建议使用local run文件安装，deb安装会重装nvidia驱动)，或：
+首先在[官网]()下载CUDA(建议使用local run文件安装，deb安装会重装nvidia驱动)，或：
 
 ```Shell
-wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run
 ```
 wget下载后可能需要改名字
 
 ```Shell
-mv cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb
+mv cuda_8.0.61_375.26_linux-run cuda_8.0.61_375.26_linux.run
 ```
 
 ![CUDA下载]({{ '/images/cuda download.png' }})
 
-这里选择的deb安装包
+这里选择的run安装包
 
 ### 1.3.3 安装CUDA
-此时电脑有双显卡：Intel 的集成显卡 + Nvidia 的独立显卡。要想两个显卡同时运行，需要关闭 lightdm 服务。
+此时电脑如果有双显卡：Intel 的集成显卡 + Nvidia 的独立显卡。要想两个显卡同时运行，需要关闭 lightdm 服务。
 在BIOS设置里选择用Intel显卡来显示或作为主要显示设备
 进入Ubuntu后按 ctrl+alt+F1 或直接远程登陆，登入自己的账号，然后输入以下命令
 
@@ -146,19 +97,15 @@ sudo service lightdm stop
 安装，执行以下命令：
 
 ```Shell
-sudo dpkg -i cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb
-sudo apt-get update
-sudo apt-get install cuda
+sudo chmod +x ./cuda_8.0.61_375.26_linux.run
+sudo ./cuda_8.0.61_375.26_linux.run
 ```
 
-将路径加入PATH
+安装过程中，在询问是否安装openGL的时候选择no。  
+安装完成后需要在/etc/profile中添加环境变量, 在文件最后添加:
 ```Shell
-# 修改所有用户的路径
-sudo vim /etc/bash.bashrc
-#在结尾添加如下三行
-export CUDA_HOME=/usr/local/cuda-8.0
-export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+PATH=/usr/local/cuda-6.5/bin:$PATH
+export PATH
 
 source /etc/bash.bashrc
 
