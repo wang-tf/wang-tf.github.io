@@ -109,7 +109,7 @@ export PATH
 
 source /etc/profile
 
-# 修改当前用户的路径
+# 在 /etc/ld.so.conf.d/加入文件 cuda.conf, 内容如下
 sudo vim ~/.bashrc
 #同样添加这三行
 export CUDA_HOME=/usr/local/cuda-8.0
