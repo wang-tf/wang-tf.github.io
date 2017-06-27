@@ -101,23 +101,24 @@ sudo chmod +x ./cuda_8.0.61_375.26_linux.run
 sudo ./cuda_8.0.61_375.26_linux.run
 ```
 
-安装过程中，在询问是否安装openGL的时候选择no。  
+安装过程中，在询问是否安装openGL的时候选择no。   
 安装完成后需要在/etc/profile中添加环境变量, 在文件最后添加:
 ```Shell
 PATH=/usr/local/cuda-6.5/bin:$PATH
 export PATH
-
+```
+然后使其生效
+```
 source /etc/profile
+```
 
-# 在 /etc/ld.so.conf.d/加入文件 cuda.conf, 内容如下
+在 /etc/ld.so.conf.d/加入文件 cuda.conf, 内容如下
+```
 /usr/local/cuda-6.5/lib64
+```
+然后运行
+```
 sudo ldconfig
-#同样添加这三行
-export CUDA_HOME=/usr/local/cuda-8.0
-export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-
-source ~/.bashrc
 ```
 
 然后重新启动 `sudo reboot now` 或 直接启动图形界面 `sudo /etc/init.d/lightdm  start`
