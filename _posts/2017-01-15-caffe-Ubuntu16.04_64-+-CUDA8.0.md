@@ -107,7 +107,7 @@ sudo ./cuda_8.0.61_375.26_linux.run
 PATH=/usr/local/cuda-6.5/bin:$PATH
 export PATH
 
-source /etc/bash.bashrc
+source /etc/profile
 
 # 修改当前用户的路径
 sudo vim ~/.bashrc
@@ -265,34 +265,4 @@ source ~/.bashrc
 下载数据预处理和重建lmdb文件
 
 ```Shell
-cd $CAFFE_ROOT
-./data/mnist/get_mnist.sh
-./examples/mnist/create_mnist.sh
-./examples/mnist/train_lenet.sh #测试
-```
-
-# 3 可能会出现的问题
-
-## 3.1 "fatal error: hdf5.h: 没有那个文件或目录"
-解决办法：
-
-* step1:在Makefile.config文件的第85行，添加/usr/include/hdf5/serial/ 到 INCLUDE_DIRS，也就是把下面第一行代码改为第二行代码。
-```
-#将INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include 替换为：  
-INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
-```
-* stept2:在Makefile文件的第173行，把 hdf5_hl 和hdf5修改为hdf5_serial_hl 和 hdf5_serial，也就是把下面第一行代码改为第二行代码。
-```
-#将LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5 改为：  
-LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
-```
-
-## 3.2 "libcudart.so.8.0 cannot open shared object file: No such file or directory"
-解决办法是将一些文件复制到/usr/local/lib文件夹下：
-
-```Shell
-#注意自己CUDA的版本号！
-sudo cp /usr/local/cuda-8.0/lib64/libcudart.so.8.0 /usr/local/lib/libcudart.so.8.0 && sudo ldconfig
-sudo cp /usr/local/cuda-8.0/lib64/libcublas.so.8.0 /usr/local/lib/libcublas.so.8.0 && sudo ldconfig
-sudo cp /usr/local/cuda-8.0/lib64/libcurand.so.8.0 /usr/local/lib/libcurand.so.8.0 && sudo ldconfig
-```
+cd $CA
