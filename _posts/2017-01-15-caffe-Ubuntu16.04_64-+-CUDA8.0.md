@@ -25,13 +25,56 @@ tag: Caffe
 + CUDA
 + cudnn
 + python 或 matlab（这里只安装python，且在ubuntu16.04中已默认安装2.7版本）
-+udo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler
++ opencv3.1
+---
+官方指导[https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide](https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide)
+---
+# 1 安装
+## 1.1 安装相关依赖项
+在Terminal中安装依赖项
+```
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install -y build-essential cmake git pkg-config
+    sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler
+    sudo apt-get install -y libatlas-base-dev 
+    sudo apt-get install -y --no-install-recommends libboost-all-dev
+    sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev
+    # (Python general)
+    sudo apt-get install -y python-pip
+    # (Python 2.7 development files)
+    sudo apt-get install -y python-devsudo apt-get install -y python-numpy python-scipy
+    #opencv3.1依赖库
+    sudo apt-get install --assume-yes build-essential cmake git
+    sudo apt-get install --assume-yes build-essential pkg-config unzip ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
+    sudo apt-get install --assume-yes libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
+    sudo apt-get install --assume-yes libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
+    sudo apt-get install --assume-yes libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
+    sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
+```
+## 1.2 安装NVIDIA驱动
+BIOS选择自由选择显卡。如果电脑有集成显卡，并只想用集成显卡显示图像，BIOS中要选择优先使用集成显卡，并且不要安装nvidia驱动，直接安装cuda。
+安装之前先卸载已经存在的驱动版本：
+```
+    sudo apt-get remove --purge nvidia*
+```
+查看哪一个专有驱动是推荐安装的
+```
+    sudo ubuntu-drivers devices
+```
 
-sudo apt-get install -y libatlas-base-dev 
-sudo apt-get install -y --no-install-recommends libboost-all-dev
-sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev
-# pip
-sudo apt-get install -y python-pip
+![显卡信息](https://striker.teambition.net/thumbnail/110oe8cb536d1fe770c5cfd69248ff30708a/w/400/h/141)
+```
+    sudo add-apt-repository ppa:graphics-drivers  #添加官方源
+    sudo apt-get update  #刷新软件库
+    sudo apt-get install nvidia-367  #这里选择推荐的驱动
+    sudo apt-get install mesa-common-dev
+    sudo apt-get install freeglut3-dev
+```
+也可以在[界面安装](https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia)或去[官网](http://www.nvidia.com/Download/index.aspx?lang=en-us)查看适合自己显卡的驱动*
+安装成功后需要重启生效，并通过命令`nvidia-smi`检测是否安装成功
+
+![安装成功](https://striker.teambition.net/thumbnail/110o1b92c1b83228f6a943eb153e02060866/w/400/h/205)
 *也可以在[界面安装](https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia)或去[官网](http://www.nvidia.com/Download/index.aspx?lang=en-us)查看适合自己显卡的驱动*
 安装成功后需要重启生效，并通过命令`nvidia-smi`检测是否安装成功
 
@@ -267,4 +310,31 @@ source ~/.bashrc
 下载数据预处理和重建lmdb文件
 
 ```Shell
-cd $CA
+    cd $CAFFE_ROOT
+    ./data/mnist/get_mnist.sh
+    ./examples/mnist/create_mnist.sh
+    ./examples/mnist/train_lenet.sh #测试
+```
+# 3 可能会出现的问题
+## 3.1 "fatal error: hdf5.h: 没有那个文件或目录"
+解决办法：
+* step1:在Makefile.config文件的第85行，添加/usr/include/hdf5/serial/ 到 INCLUDE_DIRS，也就是把下面第一行代码改为第二行代码。
+>将：
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+替换为：
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
+
+* stept2:在Makefile文件的第173行，把 hdf5_hl 和hdf5修改为hdf5_serial_hl 和 hdf5_serial，也就是把下面第一行代码改为第二行代码。
+>将：
+LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
+改为：
+LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
+
+## 3.2 "libcudart.so.8.0 cannot open shared object file: No such file or directory"
+解决办法是将一些文件复制到/usr/local/lib文件夹下：
+```
+    #注意自己CUDA的版本号！
+    sudo cp /usr/local/cuda-8.0/lib64/libcudart.so.8.0 /usr/local/lib/libcudart.so.8.0 && sudo ldconfig
+    sudo cp /usr/local/cuda-8.0/lib64/libcublas.so.8.0 /usr/local/lib/libcublas.so.8.0 && sudo ldconfig
+    sudo cp /usr/local/cuda-8.0/lib64/libcurand.so.8.0 /usr/local/lib/libcurand.so.8.0 && sudo ldconfig
+```
