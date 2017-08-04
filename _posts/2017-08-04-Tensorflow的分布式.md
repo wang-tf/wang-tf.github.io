@@ -85,6 +85,8 @@ def main(_):
             sess.run(init_token_op) 
         
         # 下面的按照通常的sess运行写就ok了
+        
+    sv.stop()
 ```
 
 **注意要点：**
