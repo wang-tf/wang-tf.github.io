@@ -28,7 +28,7 @@ tf.app.flags.DEFINE_string("job_name", "", "One of 'ps', 'worker'")
 tf.app.flags.DEFINE_integer("task_index", 0, "Index of task within the job")
 tf.app.flags.DEFINE_integer("issync", 0, "是否采用分布式的同步模式，1表示同步模式，0表示异步模式")
 ```
-## 1.2. 
+## 1.2. 主要代码部分
 在主程序中加入如下内容
 ```
 def main(_):
