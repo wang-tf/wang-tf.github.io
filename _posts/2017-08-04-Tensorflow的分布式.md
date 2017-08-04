@@ -59,20 +59,21 @@ def main(_):
         else:
             #异步模式计算更新梯度
             train_op = optimizer.apply_gradients(grads_and_vars, global_step=global_step)
-    
-    # 定义一个初始化函数 建议用init_fn定义初始化函数，可以导入ckpt，否则用init_op进行简单初始化
+    
+    # 初始化操作
+    if tf.train.latest_checkpoint(checkpoint_dir) is None:
+        init_op = tf.group(tf.global_variables_initializer(),tf.local_variables_initializer())
+    else:
+        init_op = tf.local_variables_initializer()
+    # 定义一个初始化函数,来导入ckpt
     def init_fn(sess):  # 这里要传入sess
-        if tf.train.latest_checkpoint(checkpoint_dir) is None:
-            init_op = tf.group(tf.global_variables_initializer(),tf.local_variables_initializer())
-            sess.run(init_op)
-        else:
+        if tf.train.latest_checkpoint(checkpoint_dir) is not None:
             save.restore(sess,tf.train.latest_checkpoint(checkpoint_dir))
-            init_op = tf.local_variables_initializer()
-            sess.run(init_op)
     
     # 创建分布式的sess 
     sv = tf.train.Supervisor(is_chief=(FLAGS.task_index == 0),
                                 logdir=save_path,
+                                init_op=init_op,
                                 init_fn=init_fn,  # 注意这里并没有带参数
                                 summary_op=None,
                                 saver=save,
