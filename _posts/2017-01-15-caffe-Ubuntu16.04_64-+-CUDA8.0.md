@@ -204,6 +204,7 @@ sudo ln -s libcudnn.so.5.1.5 libcudnn.so.5  #生成软衔接
 sudo ln -s libcudnn.so.5 libcudnn.so      #生成软链接
 sudo chmod a+r /usr/local/cuda-8.0/include/cudnn.h
 sudo chmod a+r /usr/local/cuda-8.0/lib64/libcudnn*  #通常已经有r权限
+sudo ldconfig
 ```
  
 ## 1.5 安装opencv3.1 *（3.2会在编译到40%的时候报错，未能解决）*
